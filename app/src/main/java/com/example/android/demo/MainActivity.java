@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.demo.data.NetworkUtils;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -19,5 +21,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new CustomRecyclerViewAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        NetworkUtils.loadData();
     }
 }
