@@ -19,7 +19,7 @@ public class NetworkUtils {
             @Override
             protected String doInBackground(Void... voids) {
                 Log.d("test#", "NetworkUtils::AsyncTask::doInBackground()");
-                return makeHttpRequest("https://eersc.usgs.gov/api/uswtdb/v1/turbines?&offset=300&limit=1");
+                return makeHttpRequest("https://corona-api.com/countries/EG");
             }
         };
         loadDataTask.execute();
