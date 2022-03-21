@@ -3,13 +3,9 @@ package com.example.android.demo.data;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.android.demo.CovidRecord;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,11 +41,11 @@ public class NetworkUtils {
         };
         loadTask.execute();
     }
-    public static void extractCovidRecords(Context context){
+    public static void extractCovidRecords(Context context){}
+    public static ArrayList<CovidRecord> extractCovidRecords(){
         String url = buildURL();
         String jsonResponse = makeHttpRequest(url);
-
-        ArrayList<CovidRecord> covidRecords = JsonUtils.extractCovidRecords(jsonResponse, 10);
+        return JsonUtils.extractCovidRecords(jsonResponse, 10);
 
     }
     private static String buildURL(){
