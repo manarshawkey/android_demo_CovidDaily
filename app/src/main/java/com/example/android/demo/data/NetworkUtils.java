@@ -20,7 +20,7 @@ public class NetworkUtils {
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     private static final String API_ENDPOINT = "https://corona-api.com/";
     private static final String PATH = "countries";
-    private static final String COUNTRY_CODE = "EG";
+    private static final String COUNTRY_CODE =  "DE";//"EG"; //use Germany instead of Egypt for now
 
 
     /**
@@ -45,6 +45,7 @@ public class NetworkUtils {
         String url = buildURL();
         String jsonResponse = makeHttpRequest(url);
 
+        JsonUtils.extractCovidRecords(jsonResponse, 10);
         if(jsonResponse == null){
             Log.d(LOG_TAG, "response is null");
         }else {

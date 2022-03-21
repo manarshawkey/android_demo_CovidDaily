@@ -7,11 +7,14 @@ public class CovidRecord {
     private int confirmedCases;
     private String date;
 
+    private int active;
 
-    CovidRecord(String date, int confirmedCases, int deaths){
+
+    public CovidRecord(String date, int confirmedCases, int deaths, int active){
         this.date = date;
         this.confirmedCases = confirmedCases;
         this.deaths = deaths;
+        this.active = active;
     }
 
     public String getDate() {
@@ -36,5 +39,13 @@ public class CovidRecord {
 
     public void setDeaths(int deaths) {
         this.deaths = deaths;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 }
