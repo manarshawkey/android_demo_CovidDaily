@@ -21,6 +21,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new CustomRecyclerViewAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        NetworkUtils.loadData();
+        NetworkUtils.testDataLoading(this);
     }
 }

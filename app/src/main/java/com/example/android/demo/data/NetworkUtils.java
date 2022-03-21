@@ -1,7 +1,13 @@
 package com.example.android.demo.data;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,20 +19,54 @@ import java.net.URL;
 
 public class NetworkUtils {
 
-    public static void loadData(){
-        Log.d("test#", "NetworkUtils::loadData()");
-        AsyncTask<Void, Void, String> loadDataTask = new AsyncTask<Void, Void, String>() {
+    private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
+    private static final String API_ENDPOINT = "https://corona-api.com/";
+    private static final String PATH = "countries";
+    private static final String COUNTRY_CODE = "EG";
+
+
+    /**
+     * This class should not be instantiated,
+     * so provide a private constructor
+     */
+    private NetworkUtils(){}
+
+    public static void testDataLoading(Context context){
+        Log.d(LOG_TAG, "testDataLoading()");
+        AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
             @Override
-            protected String doInBackground(Void... voids) {
-                Log.d("test#", "NetworkUtils::AsyncTask::doInBackground()");
-                return makeHttpRequest("https://corona-api.com/countries/EG");
+            protected Void doInBackground(Void... voids) {
+                //extractCovidRecords();
+                extractCovidRecords(context);
+                return null;
             }
         };
-        loadDataTask.execute();
+        loadTask.execute();
+    }
+    public static void extractCovidRecords(Context context){
+        String url = buildURL();
+        String jsonResponse = makeHttpRequest(url);
+        //Log.d(LOG_TAG, jsonResponse);
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            Log.d(LOG_TAG, jsonResponse.length() + "");
+            Log.d(LOG_TAG, jsonObject.has("data")?"true":"false");
+            JSONObject dataObject = jsonObject.getJSONObject("data");
+            Log.d(LOG_TAG, dataObject.has("timeline")?"has timeline":"doesn't have timeline");
+            JSONArray timeline = dataObject.getJSONArray("timeline");
+            Log.d(LOG_TAG, timeline.length() + " " + "timeline");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private static String buildURL(){
+        return API_ENDPOINT + PATH + "/" + COUNTRY_CODE;
     }
 
     private static String makeHttpRequest(String url){
-        Log.d("test#", "NetworkUtils::makeHttpRequest()");
+        Log.d(LOG_TAG, "NetworkUtils::makeHttpRequest()");
         String jsonResponse = null;
         if(url == null || url.equals(""))
             return jsonResponse;
@@ -40,11 +80,10 @@ public class NetworkUtils {
             urlConnection.setConnectTimeout(15000);
             urlConnection.setReadTimeout(10000);
             urlConnection.connect();
-            Log.d("test#", urlConnection.getResponseCode() + "");
+            Log.d(LOG_TAG, "Status code: " + urlConnection.getResponseCode());
             if(urlConnection.getResponseCode() == 200){
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = jsonFromInputStream(inputStream);
-                Log.d("response data: ", jsonResponse);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -55,7 +94,7 @@ public class NetworkUtils {
     }
 
     private static String jsonFromInputStream(InputStream inputStream) {
-        Log.d("test#", "NetworkUtils::jsonFromInputStream()");
+        Log.d(LOG_TAG, "NetworkUtils::jsonFromInputStream()");
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
