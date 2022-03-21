@@ -29,10 +29,10 @@ public class CovidRecordAdapter extends ArrayAdapter<CovidRecord> {
         date.setText(currentRecord.getDate());
         
         TextView confirmedCases = listItemView.findViewById(R.id.textView_confirmed);
-        confirmedCases.setText(currentRecord.getConfirmedCases());
+        confirmedCases.setText(String.valueOf(currentRecord.getConfirmedCases()));
         
         TextView deaths = listItemView.findViewById(R.id.textView_deaths);
-        deaths.setText(currentRecord.getDeaths());
+        deaths.setText(String.valueOf(currentRecord.getDeaths()));
         
         return listItemView;
     }

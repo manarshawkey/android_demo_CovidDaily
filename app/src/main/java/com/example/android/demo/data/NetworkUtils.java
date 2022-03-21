@@ -29,19 +29,19 @@ public class NetworkUtils {
      */
     private NetworkUtils(){}
 
-    public static void testDataLoading(Context context){
+    /*public static void testDataLoading(Context context){
         Log.d(LOG_TAG, "testDataLoading()");
         AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 //extractCovidRecords();
-                extractCovidRecords(context);
+                //extractCovidRecords(context);
                 return null;
             }
         };
         loadTask.execute();
-    }
-    public static void extractCovidRecords(Context context){}
+    }*/
+
     public static ArrayList<CovidRecord> extractCovidRecords(){
         String url = buildURL();
         String jsonResponse = makeHttpRequest(url);
