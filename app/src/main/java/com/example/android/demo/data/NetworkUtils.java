@@ -3,7 +3,6 @@ package com.example.android.demo.data;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class NetworkUtils {
@@ -46,18 +44,21 @@ public class NetworkUtils {
     public static void extractCovidRecords(Context context){
         String url = buildURL();
         String jsonResponse = makeHttpRequest(url);
-        //Log.d(LOG_TAG, jsonResponse);
 
-        try {
-            JSONObject jsonObject = new JSONObject(jsonResponse);
-            Log.d(LOG_TAG, jsonResponse.length() + "");
-            Log.d(LOG_TAG, jsonObject.has("data")?"true":"false");
-            JSONObject dataObject = jsonObject.getJSONObject("data");
-            Log.d(LOG_TAG, dataObject.has("timeline")?"has timeline":"doesn't have timeline");
-            JSONArray timeline = dataObject.getJSONArray("timeline");
-            Log.d(LOG_TAG, timeline.length() + " " + "timeline");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(jsonResponse == null){
+            Log.d(LOG_TAG, "response is null");
+        }else {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonResponse);
+                Log.d(LOG_TAG, jsonResponse.length() + "");
+                Log.d(LOG_TAG, jsonObject.has("data") ? "true" : "false");
+                JSONObject dataObject = jsonObject.getJSONObject("data");
+                Log.d(LOG_TAG, dataObject.has("timeline") ? "has timeline" : "doesn't have timeline");
+                JSONArray timeline = dataObject.getJSONArray("timeline");
+                Log.d(LOG_TAG, timeline.length() + " " + "timeline");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -69,10 +70,10 @@ public class NetworkUtils {
         Log.d(LOG_TAG, "NetworkUtils::makeHttpRequest()");
         String jsonResponse = null;
         if(url == null || url.equals(""))
-            return jsonResponse;
+            return null;
 
-        HttpURLConnection urlConnection = null;
-        InputStream inputStream = null;
+        HttpURLConnection urlConnection;
+        InputStream inputStream;
         try {
             URL urlObject = new URL(url);
             urlConnection = (HttpURLConnection) urlObject.openConnection();
@@ -85,8 +86,6 @@ public class NetworkUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = jsonFromInputStream(inputStream);
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
