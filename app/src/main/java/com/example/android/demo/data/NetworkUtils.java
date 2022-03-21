@@ -3,6 +3,9 @@ package com.example.android.demo.data;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.android.demo.CovidRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class NetworkUtils {
 
@@ -45,22 +49,7 @@ public class NetworkUtils {
         String url = buildURL();
         String jsonResponse = makeHttpRequest(url);
 
-        JsonUtils.extractCovidRecords(jsonResponse, 10);
-        if(jsonResponse == null){
-            Log.d(LOG_TAG, "response is null");
-        }else {
-            try {
-                JSONObject jsonObject = new JSONObject(jsonResponse);
-                Log.d(LOG_TAG, jsonResponse.length() + "");
-                Log.d(LOG_TAG, jsonObject.has("data") ? "true" : "false");
-                JSONObject dataObject = jsonObject.getJSONObject("data");
-                Log.d(LOG_TAG, dataObject.has("timeline") ? "has timeline" : "doesn't have timeline");
-                JSONArray timeline = dataObject.getJSONArray("timeline");
-                Log.d(LOG_TAG, timeline.length() + " " + "timeline");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        ArrayList<CovidRecord> covidRecords = JsonUtils.extractCovidRecords(jsonResponse, 10);
 
     }
     private static String buildURL(){
