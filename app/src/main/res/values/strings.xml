@@ -30,4 +30,5 @@
     <string name="summary_enableNotifications">Notifications Enabled</string>
     <string name="summary_disableNotifications">Notifications Disabled</string>
     <string name="key_notifications">notifications</string>
+    <string name="title_settingsActivity">Settings</string>
 </resources>
