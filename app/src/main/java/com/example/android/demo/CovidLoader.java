@@ -2,7 +2,6 @@ package com.example.android.demo;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
@@ -12,8 +11,10 @@ import java.util.List;
 
 public class CovidLoader extends AsyncTaskLoader<List<CovidRecord>> {
 
-    public CovidLoader(@NonNull Context context) {
+    private final String mCountryCode;
+    public CovidLoader(Context context, String countryCode){
         super(context);
+        mCountryCode = countryCode;
     }
 
     @Override
@@ -25,6 +26,6 @@ public class CovidLoader extends AsyncTaskLoader<List<CovidRecord>> {
     @Nullable
     @Override
     public List<CovidRecord> loadInBackground() {
-        return NetworkUtils.extractCovidRecords();
+        return NetworkUtils.extractCovidRecords(mCountryCode);
     }
 }

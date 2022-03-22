@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:title="Location">
+        app:title="@string/label_location">
     <ListPreference
-        app:key="country"
-        app:title="Country"
+        app:key="@string/key_country"
+        app:title="@string/label_country"
         app:entries="@array/country_entries"
         app:entryValues="@array/country_values"
-        app:summary="Select a country"
+        app:summary="@string/summary_country"
         app:defaultValue="DE"
         app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
-    <PreferenceCategory app:title="Notification">
+    <PreferenceCategory app:title="@string/label_notifications">
         <SwitchPreferenceCompat
-            app:title="Enable Notifications"
+            app:title="@string/label_notifications"
             app:defaultValue="false"
-            app:key="notifications"
-            app:summaryOn="Notifications Enabled"
-            app:summaryOff="Notifications Disabled"/>
+            app:key="@string/key_notifications"
+            app:summaryOn="@string/summary_enableNotifications"
+            app:summaryOff="@string/summary_disableNotifications"/>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -42,14 +42,14 @@ public class NetworkUtils {
         loadTask.execute();
     }*/
 
-    public static ArrayList<CovidRecord> extractCovidRecords(){
-        String url = buildURL();
+    public static ArrayList<CovidRecord> extractCovidRecords(String countryCode){
+        String url = buildURL(countryCode);
         String jsonResponse = makeHttpRequest(url);
         return JsonUtils.extractCovidRecords(jsonResponse, 10);
 
     }
-    private static String buildURL(){
-        return API_ENDPOINT + PATH + "/" + COUNTRY_CODE;
+    private static String buildURL(String countryCode){
+        return API_ENDPOINT + PATH + "/" + countryCode;//COUNTRY_CODE;
     }
 
     private static String makeHttpRequest(String url){
