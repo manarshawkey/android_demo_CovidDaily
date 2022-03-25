@@ -124,9 +124,17 @@ public class MainActivity extends AppCompatActivity
     private void testNotification(){
         Log.d(LOG_TAG, "testNotification");
 
-        WorkRequest fireNotification =
-                new OneTimeWorkRequest.Builder(NotificationsWorker.class).build();
-        WorkManager.getInstance(this).enqueue(fireNotification);
+        if(isNotificationsEnabled()) {
+            WorkRequest fireNotification =
+                    new OneTimeWorkRequest.Builder(NotificationsWorker.class).build();
+            WorkManager.getInstance(this).enqueue(fireNotification);
+        }
+    }
+    private boolean isNotificationsEnabled(){
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences
+                .getBoolean(getResources().getString(R.string.key_notifications), false);
     }
 
 }
