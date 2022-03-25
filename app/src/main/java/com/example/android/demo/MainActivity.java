@@ -2,12 +2,14 @@ package com.example.android.demo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
@@ -30,6 +33,7 @@ import com.example.android.demo.Notifications.NotificationsFactory;
 import com.example.android.demo.Notifications.NotificationsWorker;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
     implements LoaderManager.LoaderCallbacks<List<CovidRecord>>,
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     private CustomRecyclerViewAdapter mAdapter;
     private CovidRecordAdapter mCovidAdapter;
     private ProgressBar mProgressBar;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,16 +126,19 @@ public class MainActivity extends AppCompatActivity
         PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void testNotification(){
         Log.d(LOG_TAG, "testNotification");
 
-        if(isNotificationsEnabled()) {
+        if(areNotificationsEnabled()) {
             WorkRequest fireNotification =
-                    new OneTimeWorkRequest.Builder(NotificationsWorker.class).build();
+                    new PeriodicWorkRequest.Builder(NotificationsWorker.class,
+                            1, TimeUnit.DAYS,
+                            3, TimeUnit.HOURS).build();
             WorkManager.getInstance(this).enqueue(fireNotification);
         }
     }
-    private boolean isNotificationsEnabled(){
+    private boolean areNotificationsEnabled(){
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         return sharedPreferences
