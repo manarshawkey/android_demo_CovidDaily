@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     private CustomRecyclerViewAdapter mAdapter;
     private CovidRecordAdapter mCovidAdapter;
     private ProgressBar mProgressBar;
+
+    private static final String WORK_TAG_NOTIFICATIONS = "work-tag-notifications";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +119,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d(LOG_TAG, "preference changed: " + key);
-        LoaderManager.getInstance(this).restartLoader(0, null, this);
+        if(key.equals(getResources().getString(R.string.key_country))) {
+            LoaderManager.getInstance(this).restartLoader(0, null, this);
+        } else if(key.equals(getResources().getString(R.string.key_notifications))){
+            if(!areNotificationsEnabled())
+                WorkManager.getInstance(this).cancelAllWorkByTag(WORK_TAG_NOTIFICATIONS);
+        }
     }
 
     @Override
@@ -134,7 +141,9 @@ public class MainActivity extends AppCompatActivity
             WorkRequest fireNotification =
                     new PeriodicWorkRequest.Builder(NotificationsWorker.class,
                             1, TimeUnit.DAYS,
-                            3, TimeUnit.HOURS).build();
+                            3, TimeUnit.HOURS)
+                            .addTag(WORK_TAG_NOTIFICATIONS)
+                            .build();
             WorkManager.getInstance(this).enqueue(fireNotification);
         }
     }
