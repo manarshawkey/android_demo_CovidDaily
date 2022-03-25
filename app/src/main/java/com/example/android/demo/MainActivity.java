@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,16 +19,13 @@ import android.widget.ProgressBar;
 
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
 
-import com.example.android.demo.Notifications.NotificationsFactory;
 import com.example.android.demo.Notifications.NotificationsWorker;
 
 import java.util.List;
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(mAdapter);
         NetworkUtils.testDataLoading(this); */
 
-        testNotification();
+        schedulePeriodicNotifications();
 
         setupOnSharedPreferencesChangeListener();
         ListView listView = findViewById(R.id.list_covidRecords);
@@ -116,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d(LOG_TAG, "preference changed: " + key);
@@ -124,6 +121,9 @@ public class MainActivity extends AppCompatActivity
         } else if(key.equals(getResources().getString(R.string.key_notifications))){
             if(!areNotificationsEnabled())
                 WorkManager.getInstance(this).cancelAllWorkByTag(WORK_TAG_NOTIFICATIONS);
+            else{
+                schedulePeriodicNotifications();
+            }
         }
     }
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void testNotification(){
+    private void schedulePeriodicNotifications(){
         Log.d(LOG_TAG, "testNotification");
 
         if(areNotificationsEnabled()) {
