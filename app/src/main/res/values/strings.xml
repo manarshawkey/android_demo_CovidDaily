@@ -31,4 +31,5 @@
     <string name="summary_disableNotifications">Notifications Disabled</string>
     <string name="key_notifications">notifications</string>
     <string name="title_settingsActivity">Settings</string>
+    <string name="notificationMsg_covidAlert">In a crowded place? Don\'t forget to put on your face mask!</string>
 </resources>

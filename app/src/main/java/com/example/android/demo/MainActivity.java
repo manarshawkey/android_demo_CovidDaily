@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,8 @@ import androidx.loader.content.Loader;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.android.demo.Notifications.NotificationsFactory;
 
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(mAdapter);
         NetworkUtils.testDataLoading(this); */
 
+        testNotification();
 
         setupOnSharedPreferencesChangeListener();
         ListView listView = findViewById(R.id.list_covidRecords);
@@ -111,5 +115,9 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+    private void testNotification(){
+        Log.d(LOG_TAG, "testNotification");
+        NotificationsFactory.makeANotification(this);
     }
 }
