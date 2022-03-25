@@ -18,11 +18,16 @@ import android.widget.ProgressBar;
 
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 
 import com.example.android.demo.Notifications.NotificationsFactory;
+import com.example.android.demo.Notifications.NotificationsWorker;
 
 import java.util.List;
 
@@ -118,6 +123,10 @@ public class MainActivity extends AppCompatActivity
     }
     private void testNotification(){
         Log.d(LOG_TAG, "testNotification");
-        NotificationsFactory.makeANotification(this);
+
+        WorkRequest fireNotification =
+                new OneTimeWorkRequest.Builder(NotificationsWorker.class).build();
+        WorkManager.getInstance(this).enqueue(fireNotification);
     }
+
 }
