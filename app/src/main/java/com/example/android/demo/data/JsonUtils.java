@@ -21,16 +21,22 @@ public class JsonUtils {
             JSONObject dataObject = jsonObject.getJSONObject("data");
             JSONArray dataTimeline = dataObject.getJSONArray("timeline");
             for(int i = 0; i < numOfRecords; i++){
-                String date = dataTimeline.getJSONObject(i).getString("date");
-                int confirmedCases = dataTimeline.getJSONObject(i).getInt("new_confirmed");
-                int deaths = dataTimeline.getJSONObject(i).getInt("new_deaths");
-                int active = dataTimeline.getJSONObject(i).getInt("active");
+                JSONObject timelineRecord = dataTimeline.getJSONObject(i);
+                String date = timelineRecord.getString("date");
+                int confirmedCases = timelineRecord.getInt("new_confirmed");
+                int deaths = timelineRecord.getInt("new_deaths");
+                int active = timelineRecord.getInt("active");
+                int totalDeaths = timelineRecord.getInt("deaths");
+                int totalConfirmed = timelineRecord.getInt("confirmed");
                 CovidRecord covidRecord = new CovidRecord(
                         date,
                         confirmedCases,
                         deaths,
                         active
                 );
+                covidRecord.setTotalConfirmed(totalConfirmed);
+                covidRecord.setTotalDeaths(totalDeaths);
+
                 Log.d(LOG_TAG, i + ", active cases: " + covidRecord.getActive());
                 records.add(covidRecord);
             }

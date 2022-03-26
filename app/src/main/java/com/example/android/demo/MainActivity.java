@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -56,13 +57,20 @@ public class MainActivity extends AppCompatActivity
         schedulePeriodicNotifications();
 
         setupOnSharedPreferencesChangeListener();
+
+        showProgressBar();
+
         ListView listView = findViewById(R.id.list_covidRecords);
-        mProgressBar = findViewById(R.id.progressBar_loading);
-        mProgressBar.setVisibility(View.VISIBLE);
         mCovidAdapter = new CovidRecordAdapter(this, 0);
         listView.setAdapter(mCovidAdapter);
         LoaderManager.getInstance(this).initLoader(0, null, this);
     }
+
+    private void showProgressBar() {
+        mProgressBar = findViewById(R.id.progressBar_loading);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
     private void setupOnSharedPreferencesChangeListener(){
         Log.d(LOG_TAG, "setupPreferenceChangeListener()");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -105,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.menu_options){
+        if(item.getItemId() == R.id.menuOption_settings){
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
@@ -135,14 +143,13 @@ public class MainActivity extends AppCompatActivity
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void schedulePeriodicNotifications(){
-        Log.d(LOG_TAG, "testNotification");
-
         if(areNotificationsEnabled()) {
             WorkRequest fireNotification =
                     new PeriodicWorkRequest.Builder(NotificationsWorker.class,
-                            1, TimeUnit.DAYS,
-                            3, TimeUnit.HOURS)
+                            PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS,
+                            PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
                             .addTag(WORK_TAG_NOTIFICATIONS)
+                            .setInitialDelay(10, TimeUnit.MINUTES) //for testing
                             .build();
             WorkManager.getInstance(this).enqueue(fireNotification);
         }

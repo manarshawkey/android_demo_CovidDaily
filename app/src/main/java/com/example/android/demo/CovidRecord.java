@@ -9,6 +9,10 @@ public class CovidRecord {
 
     private int active;
 
+    private int totalConfirmed;
+    private int totalDeaths;
+
+
 
     public CovidRecord(String date, int confirmedCases, int deaths, int active){
         this.date = date;
@@ -48,4 +52,20 @@ public class CovidRecord {
     public void setActive(int active) {
         this.active = active;
     }
+    public int getTotalConfirmed() {
+        return totalConfirmed;
+    }
+
+    public void setTotalConfirmed(int totalConfirmed) {
+        this.totalConfirmed = totalConfirmed;
+    }
+
+    public int getTotalDeaths() {
+        return totalDeaths;
+    }
+
+    public void setTotalDeaths(int totalDeaths) {
+        this.totalDeaths = totalDeaths;
+    }
+
 }
