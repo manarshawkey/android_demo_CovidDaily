@@ -29,6 +29,7 @@ public class JsonUtils {
                 String date = timelineRecord.getString("date");
 
                 date = formatDate(date);
+
                 int confirmedCases = timelineRecord.getInt("new_confirmed");
                 int deaths = timelineRecord.getInt("new_deaths");
                 int active = timelineRecord.getInt("active");
