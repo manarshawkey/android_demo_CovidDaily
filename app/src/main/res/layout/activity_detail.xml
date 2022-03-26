@@ -6,4 +6,133 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+    <TextView
+        android:id="@+id/textView_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="Saturday, March 26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+    <TextView
+        android:id="@+id/label_newConfirmedCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/label_newConfirmedCases"
+        app:layout_constraintEnd_toStartOf="@+id/textView_date"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date"
+        />
+
+    <TextView
+        android:id="@+id/label_totalConfirmedCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/label_totalConfirmedCases"
+        app:layout_constraintEnd_toEndOf="@+id/label_newConfirmedCases"
+        app:layout_constraintStart_toStartOf="@+id/label_newConfirmedCases"
+        app:layout_constraintTop_toBottomOf="@+id/label_newConfirmedCases" />
+
+    <TextView
+        android:id="@+id/label_newDeaths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/label_newDeaths"
+        app:layout_constraintStart_toStartOf="@+id/label_totalConfirmedCases"
+        app:layout_constraintTop_toBottomOf="@+id/label_totalConfirmedCases" />
+
+    <TextView
+        android:id="@+id/label_totalDeaths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/label_totalDeaths"
+        app:layout_constraintStart_toStartOf="@+id/label_newDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/label_newDeaths" />
+
+    <TextView
+        android:id="@+id/label_activeCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/label_totalActiveCases"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/label_totalDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/label_totalDeaths"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_totalActiveCases"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="?attr/actionModeShareDrawable"
+        android:contentDescription="@string/contentDesc_fabShare"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/textView_newConfirmedCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toEndOf="@+id/label_newConfirmedCases"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date"
+        tools:text="12343" />
+
+    <TextView
+        android:id="@+id/textView_totalConfirmedCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        tools:text="897430"
+        app:layout_constraintStart_toStartOf="@+id/textView_newConfirmedCases"
+        app:layout_constraintTop_toBottomOf="@+id/textView_newConfirmedCases" />
+
+    <TextView
+        android:id="@+id/textView_newDeaths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        tools:text="980"
+        app:layout_constraintStart_toStartOf="@+id/textView_totalConfirmedCases"
+        app:layout_constraintTop_toBottomOf="@+id/textView_totalConfirmedCases" />
+
+    <TextView
+        android:id="@+id/textView_totalDeaths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        tools:text="80420"
+        app:layout_constraintStart_toStartOf="@+id/textView_newDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/textView_newDeaths" />
+
+    <TextView
+        android:id="@+id/textView_totalActiveCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_totalDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/textView_totalDeaths"
+        tools:text="109032" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

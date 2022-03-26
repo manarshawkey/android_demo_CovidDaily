@@ -33,4 +33,10 @@
     <string name="title_settingsActivity">Settings</string>
     <string name="notificationMsg_covidAlert">In a crowded place? Don\'t forget to put on your face mask!</string>
     <string name="title_detailActivity">Details</string>
+    <string name="label_newConfirmedCases">New Confirmed Cases</string>
+    <string name="label_totalConfirmedCases">Total Confirmed Cases</string>
+    <string name="label_newDeaths">New Deaths</string>
+    <string name="label_totalDeaths">Total Deaths</string>
+    <string name="label_totalActiveCases">Total Active Cases</string>
+    <string name="contentDesc_fabShare">Press to Share the details of this Covid Record</string>
 </resources>
