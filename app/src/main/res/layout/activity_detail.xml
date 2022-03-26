@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+        android:textSize="28sp"/>
 
     <TextView
         android:id="@+id/label_newConfirmedCases"

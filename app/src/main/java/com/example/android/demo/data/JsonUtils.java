@@ -8,7 +8,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class JsonUtils {
     private static final String LOG_TAG = JsonUtils.class.getSimpleName();
@@ -23,6 +27,8 @@ public class JsonUtils {
             for(int i = 0; i < numOfRecords; i++){
                 JSONObject timelineRecord = dataTimeline.getJSONObject(i);
                 String date = timelineRecord.getString("date");
+
+                date = formatDate(date);
                 int confirmedCases = timelineRecord.getInt("new_confirmed");
                 int deaths = timelineRecord.getInt("new_deaths");
                 int active = timelineRecord.getInt("active");
@@ -44,5 +50,19 @@ public class JsonUtils {
             e.printStackTrace();
         }
         return records;
+    }
+    private static String formatDate(String d){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        Date date;
+        String stringDate = null;
+        try {
+            date = simpleDateFormat.parse(d);
+            if(date != null)
+                stringDate = new SimpleDateFormat("EEEE, dd-MMM-yyyy", Locale.US).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return stringDate;
     }
 }
