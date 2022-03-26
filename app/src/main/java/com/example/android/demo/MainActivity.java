@@ -29,7 +29,6 @@ import androidx.work.WorkRequest;
 
 import com.example.android.demo.Notifications.NotificationsWorker;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
