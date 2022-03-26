@@ -32,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         getCurrentRecord();
         initViews();
         displayData();
-
+        setupFAB();
     }
 
     private void getCurrentRecord() {
@@ -44,6 +44,35 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    private void setupFAB() {
+        mShareFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                StringBuilder text = new StringBuilder();
+                text.append("Checkout Covid Daily Report\n\n");
+                text.append(getResources().getString(R.string.label_date));
+                text.append(": ").append(mCurrentRecord.getDate()).append('\n');
+                text.append(getResources().getString(R.string.label_newConfirmedCases));
+                text.append(": ").append(mCurrentRecord.getConfirmedCases()).append('\n');
+                text.append(getResources().getString(R.string.label_totalConfirmedCases));
+                text.append(": ").append(mCurrentRecord.getTotalConfirmed()).append('\n');
+                text.append(getResources().getString(R.string.label_totalActiveCases));
+                text.append(": ").append(mCurrentRecord.getActive()).append('\n');
+                text.append(getResources().getString(R.string.label_newDeaths));
+                text.append(": ").append(mCurrentRecord.getDeaths()).append('\n');
+                text.append(getResources().getString(R.string.label_totalDeaths));
+                text.append(": ").append(mCurrentRecord.getTotalDeaths()).append('\n');
+                sendIntent.putExtra(Intent.EXTRA_TEXT, text.toString());
+
+                Intent shareIntent = Intent.createChooser(sendIntent,
+                        getString(R.string.title_shareIntent));
+                startActivity(shareIntent);
+            }
+        });
+    }
     private void displayData() {
         if(mCurrentRecord != null) {
             mDate.setText(String.valueOf(mCurrentRecord.getDate()));
