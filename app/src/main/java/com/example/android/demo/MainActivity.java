@@ -63,6 +63,14 @@ public class MainActivity extends AppCompatActivity
         ListView listView = findViewById(R.id.list_covidRecords);
         mCovidAdapter = new CovidRecordAdapter(this, 0);
         listView.setAdapter(mCovidAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                CovidRecord record = (CovidRecord) adapterView.getItemAtPosition(position);
+                Log.d(LOG_TAG, record.getDate());
+            }
+        });
+
         LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
