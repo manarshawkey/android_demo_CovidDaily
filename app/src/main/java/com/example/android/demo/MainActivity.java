@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private CustomRecyclerViewAdapter mAdapter;
     private CovidRecordAdapter mCovidAdapter;
     private ProgressBar mProgressBar;
-
+    private ListView mListView;
     private static final String WORK_TAG_NOTIFICATIONS = "work-tag-notifications";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -60,18 +60,22 @@ public class MainActivity extends AppCompatActivity
 
         showProgressBar();
 
-        ListView listView = findViewById(R.id.list_covidRecords);
+        setupListView();
+
+        LoaderManager.getInstance(this).initLoader(0, null, this);
+    }
+
+    private void setupListView() {
+        mListView = findViewById(R.id.list_covidRecords);
         mCovidAdapter = new CovidRecordAdapter(this, 0);
-        listView.setAdapter(mCovidAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setAdapter(mCovidAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 CovidRecord record = (CovidRecord) adapterView.getItemAtPosition(position);
                 Log.d(LOG_TAG, record.getDate());
             }
         });
-
-        LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
     private void showProgressBar() {
