@@ -1,7 +1,9 @@
 package com.example.android.demo;
 
 
-public class CovidRecord {
+import java.io.Serializable;
+
+public class CovidRecord implements Serializable {
 
     private int deaths;
     private int confirmedCases;

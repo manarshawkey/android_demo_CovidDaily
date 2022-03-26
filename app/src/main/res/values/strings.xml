@@ -32,4 +32,5 @@
     <string name="key_notifications">notifications</string>
     <string name="title_settingsActivity">Settings</string>
     <string name="notificationMsg_covidAlert">In a crowded place? Don\'t forget to put on your face mask!</string>
+    <string name="title_detailActivity">Details</string>
 </resources>

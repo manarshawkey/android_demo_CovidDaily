@@ -29,6 +29,7 @@ import androidx.work.WorkRequest;
 
 import com.example.android.demo.Notifications.NotificationsWorker;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(mAdapter);
         NetworkUtils.testDataLoading(this); */
 
-        schedulePeriodicNotifications();
-
         setupOnSharedPreferencesChangeListener();
+
+        schedulePeriodicNotifications();
 
         showProgressBar();
 
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 CovidRecord record = (CovidRecord) adapterView.getItemAtPosition(position);
                 Log.d(LOG_TAG, record.getDate());
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Record", record);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
