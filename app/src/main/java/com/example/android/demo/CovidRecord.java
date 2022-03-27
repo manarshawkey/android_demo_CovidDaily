@@ -14,6 +14,8 @@ public class CovidRecord implements Serializable {
     private int totalConfirmed;
     private int totalDeaths;
 
+    private String weekday;
+
 
 
     public CovidRecord(String date, int confirmedCases, int deaths, int active){
@@ -69,5 +71,14 @@ public class CovidRecord implements Serializable {
     public void setTotalDeaths(int totalDeaths) {
         this.totalDeaths = totalDeaths;
     }
+
+    public String getWeekday() {
+        return weekday;
+    }
+
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
+    }
+
 
 }

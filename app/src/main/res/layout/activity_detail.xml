@@ -10,26 +10,23 @@
         android:id="@+id/textView_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        tools:text="Saturday, March 26"
+        android:layout_marginTop="92dp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="26sp"/>
+        tools:text="Saturday, March 26" />
 
     <TextView
         android:id="@+id/label_newConfirmedCases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="60dp"
         android:text="@string/label_newConfirmedCases"
-        app:layout_constraintEnd_toStartOf="@+id/textView_date"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_date"
-        />
+        app:layout_constraintStart_toEndOf="@+id/imageView_newConfirmed"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
 
     <TextView
         android:id="@+id/label_totalConfirmedCases"
@@ -38,6 +35,7 @@
         android:layout_marginTop="52dp"
         android:text="@string/label_totalConfirmedCases"
         app:layout_constraintEnd_toEndOf="@+id/label_newConfirmedCases"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/label_newConfirmedCases"
         app:layout_constraintTop_toBottomOf="@+id/label_newConfirmedCases" />
 
@@ -54,7 +52,7 @@
         android:id="@+id/label_totalDeaths"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:text="@string/label_totalDeaths"
         app:layout_constraintStart_toStartOf="@+id/label_newDeaths"
         app:layout_constraintTop_toBottomOf="@+id/label_newDeaths" />
@@ -63,7 +61,7 @@
         android:id="@+id/label_activeCases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:text="@string/label_totalActiveCases"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/label_totalDeaths"
@@ -90,11 +88,12 @@
         android:id="@+id/textView_newConfirmedCases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toEndOf="@+id/label_newConfirmedCases"
         app:layout_constraintTop_toBottomOf="@+id/textView_date"
-        tools:text="12343" />
+        tools:text="12343"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView_totalConfirmedCases"
@@ -103,7 +102,8 @@
         android:layout_marginTop="52dp"
         tools:text="897430"
         app:layout_constraintStart_toStartOf="@+id/textView_newConfirmedCases"
-        app:layout_constraintTop_toBottomOf="@+id/textView_newConfirmedCases" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_newConfirmedCases"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView_newDeaths"
@@ -112,27 +112,91 @@
         android:layout_marginTop="52dp"
         tools:text="980"
         app:layout_constraintStart_toStartOf="@+id/textView_totalConfirmedCases"
-        app:layout_constraintTop_toBottomOf="@+id/textView_totalConfirmedCases" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_totalConfirmedCases"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView_totalDeaths"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        tools:text="80420"
+        android:layout_marginTop="54dp"
         app:layout_constraintStart_toStartOf="@+id/textView_newDeaths"
-        app:layout_constraintTop_toBottomOf="@+id/textView_newDeaths" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_newDeaths"
+        tools:text="80420"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView_totalActiveCases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="58dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView_totalDeaths"
         app:layout_constraintTop_toBottomOf="@+id/textView_totalDeaths"
-        tools:text="109032" />
+        tools:text="109032"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/imageView_newDeaths"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/label_newDeaths"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView_totalConfirmed"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_totalConfirmed"
+        app:srcCompat="@drawable/ic_covid_death"
+        android:contentDescription="@string/contentDesc_newDeaths"/>
+
+    <ImageView
+        android:id="@+id/imageView_totalDeaths"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/label_totalDeaths"
+        app:layout_constraintStart_toStartOf="@+id/imageView_newDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_newDeaths"
+        app:srcCompat="@drawable/ic_total_death"
+        android:contentDescription="@string/contentDesc_totalDeaths"/>
+
+    <ImageView
+        android:id="@+id/imageView_totalActive"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/label_activeCases"
+        app:layout_constraintStart_toStartOf="@+id/imageView_totalDeaths"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_totalDeaths"
+        app:srcCompat="@drawable/ic_active_cases"
+        android:contentDescription="@string/contentDesc_totalActive"/>
+
+    <ImageView
+        android:id="@+id/imageView_totalConfirmed"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/label_totalConfirmedCases"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/imageView_newConfirmed"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_newConfirmed"
+        app:srcCompat="@drawable/ic_total_confirmed"
+        android:contentDescription="@string/contentDesc_totalConfirmed"/>
+
+    <ImageView
+        android:id="@+id/imageView_newConfirmed"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/label_newConfirmedCases"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date"
+        app:srcCompat="@drawable/ic_new_confirmed"
+        android:contentDescription="@string/contentDesc_newConfirmed"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

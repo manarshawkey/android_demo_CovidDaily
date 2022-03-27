@@ -4,12 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/covid.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_active_cases.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable/ic_circle.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_facemask.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/ic_new_confirmed.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable/ic_total_confirmed.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable/ic_total_death.xml" value="0.198" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.15579710144927536" />
-        <entry key="app/src/main/res/layout/record_list_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/record_list_item.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.1703125" />
         <entry key="app/src/main/res/xml/preferences.xml" value="0.13541666666666666" />

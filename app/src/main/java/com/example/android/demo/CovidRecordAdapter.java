@@ -33,6 +33,9 @@ public class CovidRecordAdapter extends ArrayAdapter<CovidRecord> {
         
         TextView deaths = listItemView.findViewById(R.id.textView_deaths);
         deaths.setText(String.valueOf(currentRecord.getDeaths()));
+
+        TextView weekday = listItemView.findViewById(R.id.textView_weekday);
+        weekday.setText(currentRecord.getWeekday());
         
         return listItemView;
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Demo</string>
+    <string name="app_name">Covid Daily</string>
     <string name="settings">Settings</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -9,14 +9,6 @@
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_settings2">SettingsActivity2</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Location Preferences -->
     <string name="key_country">country</string>
@@ -42,4 +34,11 @@
     <string name="label_date">Date</string>
     <string name="title_shareIntent">Share Daily Covid Report</string>
     <string name="no_internet_connection">No Internet Connection :(</string>
+    <string name="contentDesc_newDeaths">An image representing deaths caused by Covid.</string>
+    <string name="contentDesc_newConfirmed">An image of positive covid cases</string>
+    <string name="contentDesc_totalConfirmed">An image representing statistics, referring to the total number of confirmed covid cases</string>
+    <string name="contentDesc_totalActive">An image of hospitalized person representing total number of active Covid cases</string>
+    <string name="contentDesc_totalDeaths">An image representing the total deaths caused by Covid.</string>
+    <string name="label_confirmed_cases">Confirmed Cases</string>
+    <string name="label_deaths">Deaths</string>
 </resources>

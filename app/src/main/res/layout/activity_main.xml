@@ -20,7 +20,8 @@
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="0dp"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        />
 
     <TextView
            android:id="@+id/textView_noConnection"

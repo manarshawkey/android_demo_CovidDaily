@@ -28,7 +28,7 @@ public class JsonUtils {
                 JSONObject timelineRecord = dataTimeline.getJSONObject(i);
                 String date = timelineRecord.getString("date");
 
-                date = formatDate(date);
+                String formattedDate = formatDate(date);
 
                 int confirmedCases = timelineRecord.getInt("new_confirmed");
                 int deaths = timelineRecord.getInt("new_deaths");
@@ -36,14 +36,14 @@ public class JsonUtils {
                 int totalDeaths = timelineRecord.getInt("deaths");
                 int totalConfirmed = timelineRecord.getInt("confirmed");
                 CovidRecord covidRecord = new CovidRecord(
-                        date,
+                        formattedDate,
                         confirmedCases,
                         deaths,
                         active
                 );
                 covidRecord.setTotalConfirmed(totalConfirmed);
                 covidRecord.setTotalDeaths(totalDeaths);
-
+                covidRecord.setWeekday(getWeekday(date));
                 Log.d(LOG_TAG, i + ", active cases: " + covidRecord.getActive());
                 records.add(covidRecord);
             }
@@ -59,11 +59,25 @@ public class JsonUtils {
         try {
             date = simpleDateFormat.parse(d);
             if(date != null)
-                stringDate = new SimpleDateFormat("EEEE, dd-MMM-yyyy", Locale.US).format(date);
+                stringDate = new SimpleDateFormat("MMMM dd, yyyy", Locale.US).format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         return stringDate;
+    }
+    private static String getWeekday(String d){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        Date date;
+        String stringDate = null;
+        try {
+            date = simpleDateFormat.parse(d);
+            if(date != null)
+                stringDate = new SimpleDateFormat("EEE", Locale.US).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return stringDate;//d.substring(0, 3).toUpperCase(Locale.ROOT);
     }
 }
