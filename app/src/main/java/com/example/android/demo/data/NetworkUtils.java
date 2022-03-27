@@ -1,6 +1,8 @@
 package com.example.android.demo.data;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Provider;
 import java.util.ArrayList;
 
 public class NetworkUtils {
@@ -95,5 +98,17 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return stringBuilder.toString();
+    }
+
+    public static boolean hasNetworkConnection(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if(activeNetwork != null){
+            int networkType = activeNetwork.getType();
+            return networkType == ConnectivityManager.TYPE_WIFI
+                    || networkType == ConnectivityManager.TYPE_MOBILE;
+        }
+        return false;
     }
 }

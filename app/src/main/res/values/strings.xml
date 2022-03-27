@@ -41,4 +41,5 @@
     <string name="contentDesc_fabShare">Press to Share the details of this Covid Record</string>
     <string name="label_date">Date</string>
     <string name="title_shareIntent">Share Daily Covid Report</string>
+    <string name="no_internet_connection">No Internet Connection :(</string>
 </resources>

@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -28,9 +27,12 @@ import androidx.work.WorkRequest;
 
 
 import com.example.android.demo.Notifications.NotificationsWorker;
+import com.example.android.demo.data.NetworkUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+//TODO: Add some visual polish to MainActivity
 
 public class MainActivity extends AppCompatActivity
     implements LoaderManager.LoaderCallbacks<List<CovidRecord>>,
@@ -62,24 +64,31 @@ public class MainActivity extends AppCompatActivity
 
         setupListView();
 
+        checkNetworkStatus();
+
         LoaderManager.getInstance(this).initLoader(0, null, this);
+    }
+
+    private void checkNetworkStatus(){
+        if(!NetworkUtils.hasNetworkConnection(this)){
+            View emptyView = findViewById(R.id.textView_noConnection);
+            emptyView.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void setupListView() {
         mListView = findViewById(R.id.list_covidRecords);
         mCovidAdapter = new CovidRecordAdapter(this, 0);
         mListView.setAdapter(mCovidAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                CovidRecord record = (CovidRecord) adapterView.getItemAtPosition(position);
-                Log.d(LOG_TAG, record.getDate());
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Record", record);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+        mListView.setOnItemClickListener((adapterView, view, position, l) -> {
+            CovidRecord record = (CovidRecord) adapterView.getItemAtPosition(position);
+            Log.d(LOG_TAG, record.getDate());
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Record", record);
+            intent.putExtras(bundle);
+            startActivity(intent);
         });
     }
 
@@ -113,7 +122,8 @@ public class MainActivity extends AppCompatActivity
     public void onLoadFinished(@NonNull Loader<List<CovidRecord>> loader, List<CovidRecord> data) {
         mProgressBar.setVisibility(View.INVISIBLE);
         mCovidAdapter.clear();
-        mCovidAdapter.addAll(data);
+        if(data != null)
+            mCovidAdapter.addAll(data);
     }
 
     @Override
