@@ -19,7 +19,7 @@ to keep their face-mask on if they're in a crowded place.
 
 ## Notes
 1. This app is for educational purposes only.
-2. All data used in this app is from [this API](https://corona-api.com/)
+2. All data used in this app is from [this API](https://about-corona.net/documentation)
 3. The info about Covid-19 data in Egypt might
    be a little bit misleading, since the
    number of daily confirmed cases
