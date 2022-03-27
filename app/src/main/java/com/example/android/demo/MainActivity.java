@@ -32,29 +32,23 @@ import com.example.android.demo.data.NetworkUtils;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//TODO: Add some visual polish to MainActivity
 
 public class MainActivity extends AppCompatActivity
     implements LoaderManager.LoaderCallbacks<List<CovidRecord>>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    private RecyclerView mRecyclerView;
-    private CustomRecyclerViewAdapter mAdapter;
     private CovidRecordAdapter mCovidAdapter;
     private ProgressBar mProgressBar;
     private ListView mListView;
     private static final String WORK_TAG_NOTIFICATIONS = "work-tag-notifications";
+    private final int REPEAT_INTERVAL = 1;
+    private final int FLEX_INTERVAL = 2;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView_demo);
-        mAdapter = new CustomRecyclerViewAdapter(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter);
-        NetworkUtils.testDataLoading(this); */
 
         setupOnSharedPreferencesChangeListener();
 
@@ -98,7 +92,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupOnSharedPreferencesChangeListener(){
-        Log.d(LOG_TAG, "setupPreferenceChangeListener()");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
@@ -114,7 +107,6 @@ public class MainActivity extends AppCompatActivity
     @NonNull
     @Override
     public Loader<List<CovidRecord>> onCreateLoader(int id, @Nullable Bundle args) {
-        Log.d(LOG_TAG, "loader is being created.");
         return new CovidLoader(this, getCountryCode(MainActivity.this));
     }
 
@@ -150,7 +142,6 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.d(LOG_TAG, "preference changed: " + key);
         if(key.equals(getResources().getString(R.string.key_country))) {
             LoaderManager.getInstance(this).restartLoader(0, null, this);
         } else if(key.equals(getResources().getString(R.string.key_notifications))){
@@ -173,8 +164,8 @@ public class MainActivity extends AppCompatActivity
         if(areNotificationsEnabled()) {
             WorkRequest fireNotification =
                     new PeriodicWorkRequest.Builder(NotificationsWorker.class,
-                            PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS,
-                            PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS)
+                            REPEAT_INTERVAL, TimeUnit.DAYS,
+                            FLEX_INTERVAL, TimeUnit.HOURS)
                             .addTag(WORK_TAG_NOTIFICATIONS)
                             .setInitialDelay(10, TimeUnit.MINUTES) //for testing
                             .build();
