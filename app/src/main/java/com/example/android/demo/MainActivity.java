@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private static final String WORK_TAG_NOTIFICATIONS = "work-tag-notifications";
     private final int REPEAT_INTERVAL = 1;
     private final int FLEX_INTERVAL = 2;
+    public static final String BUNDLE_KEY_RECORD = "key-record";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
             Log.d(LOG_TAG, record.getDate());
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("Record", record);
+            bundle.putSerializable(BUNDLE_KEY_RECORD, record);
             intent.putExtras(bundle);
             startActivity(intent);
         });
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity
                             REPEAT_INTERVAL, TimeUnit.DAYS,
                             FLEX_INTERVAL, TimeUnit.HOURS)
                             .addTag(WORK_TAG_NOTIFICATIONS)
-                            .setInitialDelay(10, TimeUnit.MINUTES) //for testing
+                            .setInitialDelay(10, TimeUnit.MINUTES)
                             .build();
             WorkManager.getInstance(this).enqueue(fireNotification);
         }

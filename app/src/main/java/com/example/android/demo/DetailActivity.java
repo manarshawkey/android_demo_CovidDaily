@@ -40,8 +40,8 @@ public class DetailActivity extends AppCompatActivity {
     private void getCurrentRecord() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle != null && bundle.containsKey("Record")) {
-            mCurrentRecord = (CovidRecord) bundle.getSerializable("Record");
+        if(bundle != null && bundle.containsKey(MainActivity.BUNDLE_KEY_RECORD)) {
+            mCurrentRecord = (CovidRecord) bundle.getSerializable(MainActivity.BUNDLE_KEY_RECORD);
         }
     }
 
