@@ -107,7 +107,6 @@ public class DetailActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.title_detailActivity);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override

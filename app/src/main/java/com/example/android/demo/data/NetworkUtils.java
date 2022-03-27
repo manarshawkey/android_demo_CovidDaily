@@ -70,7 +70,6 @@ public class NetworkUtils {
             urlConnection.setConnectTimeout(15000);
             urlConnection.setReadTimeout(10000);
             urlConnection.connect();
-            Log.d(LOG_TAG, "Status code: " + urlConnection.getResponseCode());
             if(urlConnection.getResponseCode() == 200){
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = jsonFromInputStream(inputStream);
@@ -82,7 +81,6 @@ public class NetworkUtils {
     }
 
     private static String jsonFromInputStream(InputStream inputStream) {
-        Log.d(LOG_TAG, "NetworkUtils::jsonFromInputStream()");
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

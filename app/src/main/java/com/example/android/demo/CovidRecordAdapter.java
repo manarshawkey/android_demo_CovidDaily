@@ -18,7 +18,6 @@ public class CovidRecordAdapter extends ArrayAdapter<CovidRecord> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
         View listItemView = convertView;
         if(listItemView == null){
             listItemView = LayoutInflater.from(getContext())

@@ -21,6 +21,7 @@ public class JsonUtils {
             return null;
         ArrayList<CovidRecord> records = new ArrayList<>(numOfRecords);
         try {
+            Log.d(LOG_TAG, "parsing json data");
             JSONObject jsonObject = new JSONObject(jsonResponse);
             JSONObject dataObject = jsonObject.getJSONObject("data");
             JSONArray dataTimeline = dataObject.getJSONArray("timeline");
@@ -44,7 +45,6 @@ public class JsonUtils {
                 covidRecord.setTotalConfirmed(totalConfirmed);
                 covidRecord.setTotalDeaths(totalDeaths);
                 covidRecord.setWeekday(getWeekday(date));
-                Log.d(LOG_TAG, i + ", active cases: " + covidRecord.getActive());
                 records.add(covidRecord);
             }
         } catch (JSONException e) {
